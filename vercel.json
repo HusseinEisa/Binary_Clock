@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "Binary_Clock/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "Binary_Clock/wsgi.py"
+      }
+    ]
+  }

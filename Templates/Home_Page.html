@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Clock</title>
+    <link rel="stylesheet" href="{% static "Home_Style.css" %}">
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Welcome to Binary Clock</h1>
+        
+        <form action="{% url 'Result' %}" method="post">
+            {% csrf_token %}
+            <div id="Div_Format" class="input-group">
+                <label for="format">Select Format:</label>
+                <select id="format" name="format">
+                    <option value="None" hidden>----</option>
+                    <option value="decimal">Decimal</option>
+                    <option value="binary">Binary</option>
+                </select>
+            </div>
+            <div id="Time" class="input-group" style="display: none;">
+                <label for="time">Enter Time:</label>
+                <input type="text" id="time" name="time" required>
+            </div>
+            <div id="Period" class="input-group" style="display: none;">
+                <label for="period">Enter Period (AM/PM):</label>
+                <select id="period" name="period">
+                    <option value="None" hidden>----</option>
+                    <option value="Am">Am</option>
+                    <option value="Pm">Pm</option>
+                </select>
+            </div>
+            <button type="submit" id="submitBtn" style="display: none;">Submit</button>
+        </form>
+        
+        {% if State == "R" %}
+            
+            <h1>Result</h1>
+            
+            {% if Conversion_Format == "decimal" and Decimal_Input > 12 %}
+                <p>Your Decimal input is : <span>{{Decimal_Input}}</span></p>
+                <p>Which mean : <span>{{Decimal_Hour}} {{Period_Input}}</span></p>
+                <p>The Binary format is : <span>{{Binary_Hour}}</span></p>
+            {% endif %}
+            
+            {% if Conversion_Format == "decimal" and Decimal_Input <= 12 %}
+                <p>Your Decimal input is : <span>{{Decimal_Input}} {{Period_Input}}</span></p><br>
+                <p>The Binary format is : <span>{{Binary_Hour}}</span></p>
+            {% endif %}
+            
+            {% if Conversion_Format == "binary" and Binary_Input == 5 %}
+                <p>Your Binary input is : <span>{{Binary_Input}}</span></p>
+                <p>The Decimal format is : <span>{{Decimal_Hour}} {{Period_Input}}</span></p>
+            {% endif %}
+            
+            {% if Conversion_Format == "binary" and Binary_Input != 5 %}
+                <p>Your Binary input is : <span>{{Binary_Input}}</span></p>
+                <p>Which mean : <span>{{Binary_Hour}}</span></p>
+                <p>The Decimal format is : <span>{{Decimal_Hour}} {{Period_Input}}</span></p>
+            {% endif %}
+            
+        {% endif %}
+        
+    </div>
+    
+    
+    <script src="{% static "Home_Script.js" %}"></script>
+</body>
+</html>

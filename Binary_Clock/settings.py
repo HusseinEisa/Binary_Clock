@@ -132,6 +132,12 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
+    # ... other middleware ...
+]
+
 # Add this at the end of the file
 if os.environ.get('VERCEL_ENV') == 'production':
     ALLOWED_HOSTS.append('.vercel.app')

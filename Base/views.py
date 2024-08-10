@@ -30,16 +30,6 @@ def Result (request):
     global Decimal_Hour
     global Binary_Hour
     
-    Context = {
-        "State": State,
-        "Conversion_Format": Conversion_Format,
-        "Decimal_Input": Decimal_Input,
-        "Binary_Input": Binary_Input,
-        "Period_Input": Period_Input,
-        "Decimal_Hour": Decimal_Hour,
-        "Binary_Hour": Binary_Hour,
-    }
-    
     Conversion_Format = str(request.POST.get("format"))
     
     Period_Input = str(request.POST.get("period"))
@@ -57,6 +47,16 @@ def Result (request):
         Binary_Input = str(request.POST.get("time"))
         Read_Binary_Clock(Binary_Input)
     
+    
+    Context = {
+        "State": State,
+        "Conversion_Format": Conversion_Format,
+        "Decimal_Input": Decimal_Input,
+        "Binary_Input": Binary_Input,
+        "Period_Input": Period_Input,
+        "Decimal_Hour": Decimal_Hour,
+        "Binary_Hour": Binary_Hour,
+    }
     
     return render(request, "Home_Page.html", Context)
 

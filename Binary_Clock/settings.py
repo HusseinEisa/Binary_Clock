@@ -130,3 +130,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Add this at the end of the file
+if os.environ.get('VERCEL_ENV') == 'production':
+    ALLOWED_HOSTS.append('.vercel.app')
